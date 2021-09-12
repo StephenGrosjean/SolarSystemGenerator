@@ -4,5 +4,5 @@ It implement Keplerian movement and various statistics about the solar system.
 
 This project was realised as the final project of the bachelor year at SAE Institute
 
-#Build
+# Builds
 [0.1](https://github.com/StephenGrosjean/SolarSystemGenerator/raw/master/Executables/SolarSystemGenerator_Build_0.1.zip)

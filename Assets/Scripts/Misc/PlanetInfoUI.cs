@@ -24,13 +24,23 @@ public class PlanetInfoUI : MonoBehaviour
         planetUIInfo = new PlanetUI(planet);
         planetUIInfo.planetObj = planet.obj.transform;
         planetUIInfo.button = GetComponentInChildren<Image>();
-        planetUIInfo.info =
+        if(planet.data.planetClass != StellarBodyData.PlanetClass.Moon) {
+            planetUIInfo.info =
             "Diameter : " + (planet.size * 1000).ToString("F1") + " km" + "\n"
             + "Mean temperature : " + planet.temperature.ToString("F1") + " K" + "\n"
             + "Mean temperature : " + (planet.temperature - 273.15f).ToString("F1") + " C" + "\n"
-            + "Escape Velocity : " + planet.escapeVelocity.ToString("F1") + " m/s" + "\n"
+            + "Escape Velocity : " + planet.escapeVelocity.ToString("F1") + " km/s" + "\n"
             + "Type : " + (planet.isGasPlanet ? "Gas" : "Terrestrial") + "\n"
-            + "Earth like score : " + Universe.EarthLikeScore(planet, starData);
+            + "Earth like score : " + Universe.EarthLikeScore(planet, starData).ToString("F1");
+        }
+        else {
+            planetUIInfo.info =
+            "Diameter : " + (planet.size * 1000).ToString("F1") + " km" + "\n"
+            + "Mean temperature : " + planet.temperature.ToString("F1") + " K" + "\n"
+            + "Mean temperature : " + (planet.temperature - 273.15f).ToString("F1") + " C" + "\n"
+            + "Type : " + "Terrestrial Moon";
+        }
+        
         planet.obj.GetComponent<CelestialObject>().planetInfoUI = this;
     }
 

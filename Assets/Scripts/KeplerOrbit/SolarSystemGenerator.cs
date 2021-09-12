@@ -290,6 +290,7 @@ public class SolarSystemGenerator : MonoBehaviour
     private void GenerateMoons(Planet reference, int index) {
         StellarBodyData.PlanetData planetData = StellarBodyData.instance.GetData(StellarBodyData.PlanetClass.Moon);
         Planet moon = new Planet(bodyReferences.moon);
+        float mass = Random.Range(planetData.massRange.x, planetData.massRange.y);
 
         float distance = Random.Range(moonDistanceRanges[index].x, moonDistanceRanges[index].y) + reference.obj.transform.localScale.x/2;
         float eccentricity = Random.Range(planetData.eccentricityRange.x, planetData.eccentricityRange.y);
@@ -311,14 +312,18 @@ public class SolarSystemGenerator : MonoBehaviour
                                                         inclination,
                                                         rotationSpeed,
                                                         true);
-
+        moon.obj.GetComponent<CelestialObjectReference>().mass = mass;
         moon.size = Random.Range(planetData.sizeRange.x, planetData.sizeRange.y);
+        moon.isGasPlanet = false;
         moon.heatGradient = GetPlanetHeatGradient(moon);
         moon.temperature = temperatureAtDistance;
         moon.planetMat = planetData.planetMaterials[Random.Range(0, planetData.planetMaterials.Count)];
+        moon.data = planetData;
+        moon.distance = distance;
+        moon.mass = mass;
         moon.earthLikeScore = Universe.EarthLikeScore(moon, StellarBodyData.instance.GetData(solarSystemData.starClass));
         moon.density = Random.Range(planetData.densityRange.x, planetData.densityRange.y);
-        moon.escapeVelocity = Universe.FindEscapeVelocity(moon); moon.data = planetData;
+        moon.escapeVelocity = Universe.FindEscapeVelocity(moon);
         moons.Add(moon);
     }
 

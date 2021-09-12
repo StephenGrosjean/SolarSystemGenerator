@@ -3898,8 +3898,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fowardSpeed: 5
-  fastMultiplicator: 3
-  verticalSpeed: 5
+  fastMultiplicator: 4
+  verticalSpeed: 0.5
   lookSensitivity: 1.2
   lockX: 0
   lockY: 0
